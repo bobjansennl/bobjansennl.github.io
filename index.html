@@ -12,8 +12,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bob Jansen</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨‍💻</text></svg>">
     <style>
-        /* Volledige reset om kolommen te voorkomen */
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body, html {
@@ -39,11 +39,11 @@
         .hero {
             text-align: center;
             padding: 2rem;
-            z-index: 1;
+            animation: fadeIn 2s ease-out;
         }
 
         h1 {
-            font-size: clamp(3rem, 10vw, 6rem); /* Past zich aan scherm aan */
+            font-size: clamp(3rem, 10vw, 6rem);
             font-weight: 800;
             letter-spacing: -3px;
             margin-bottom: 0.5rem;
@@ -65,11 +65,28 @@
             text-transform: uppercase;
             opacity: 0.8;
             font-weight: 300;
+            margin-bottom: 2.5rem;
         }
 
-        /* Subtiele animatie bij binnenkomst */
-        .hero {
-            animation: fadeIn 2s ease-out;
+        /* LinkedIn Knop Styling */
+        .btn-linkedin {
+            display: inline-block;
+            padding: 12px 28px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-linkedin:hover {
+            background: #0077b5; /* LinkedIn Blauw */
+            border-color: #0077b5;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
         @keyframes fadeIn {
@@ -84,6 +101,10 @@
         <h1>BOB JANSEN</h1>
         <div class="line"></div>
         <p>bobjansen.nl</p>
+        
+        <a href="HTTPS://WWW.LINKEDIN.COM/IN/BOBJANSENNL" target="_blank" class="btn-linkedin">
+            LinkedIn Profiel
+        </a>
     </div>
 
 </body>
