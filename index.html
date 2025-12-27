@@ -13,12 +13,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bob Jansen</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨‍💻</text></svg>">
-
+    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body, html {
-            height: 100%;
+            min-height: 100vh;
             width: 100%;
             display: flex;
             justify-content: center;
@@ -28,7 +28,7 @@
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
             color: white;
-            overflow: hidden;
+            padding: 40px 20px;
         }
 
         @keyframes gradientBG {
@@ -39,63 +39,102 @@
 
         .hero {
             text-align: center;
-            padding: 2rem;
+            max-width: 700px;
             animation: fadeIn 2s ease-out;
         }
 
         h1 {
-            font-size: clamp(3rem, 10vw, 6rem);
+            font-size: clamp(2.5rem, 8vw, 5rem);
             font-weight: 800;
-            letter-spacing: -3px;
+            letter-spacing: -2px;
             margin-bottom: 0.5rem;
-            background: linear-gradient(to right, #fff, #94a3b8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #fff;
         }
 
         .line {
             height: 2px;
-            width: 50px;
+            width: 40px;
             background: #6366f1;
-            margin: 20px auto;
+            margin: 15px auto;
         }
 
-        p {
-            font-size: 1.2rem;
+        .domain-name {
+            font-size: 0.9rem;
             letter-spacing: 4px;
             text-transform: uppercase;
-            opacity: 0.8;
-            font-weight: 300;
+            opacity: 0.5;
             margin-bottom: 2.5rem;
         }
 
-        /* LinkedIn Knop Styling */
         .btn-linkedin {
             display: inline-flex;
             align-items: center;
-            gap: 10px; /* Ruimte tussen logo en tekst */
+            gap: 10px;
             padding: 12px 28px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             color: white;
             text-decoration: none;
             border-radius: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             font-weight: 500;
             transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-        }
-
-        .btn-linkedin svg {
-            fill: white;
-            width: 18px;
-            height: 18px;
+            margin-bottom: 4rem;
         }
 
         .btn-linkedin:hover {
-            background: #0077b5;
+            background: rgba(255, 255, 255, 0.15);
             border-color: #0077b5;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transform: translateY(-2px);
+        }
+
+        .btn-linkedin svg { fill: white; width: 18px; height: 18px; }
+
+        /* Certificeringen */
+        .certs-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+            opacity: 0.4;
+        }
+
+        .certs-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .cert-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 120px;
+            transition: all 0.3s ease;
+        }
+
+        .cert-card svg {
+            width: 32px;
+            height: 32px;
+            fill: rgba(255, 255, 255, 0.3); /* Grijs uiterlijk */
+            margin-bottom: 12px;
+            transition: fill 0.3s ease;
+        }
+
+        .cert-card:hover svg {
+            fill: rgba(255, 255, 255, 0.9); /* Licht op bij hover */
+        }
+
+        .cert-name {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.4);
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .cert-card:hover .cert-name {
+            color: rgba(255, 255, 255, 0.8);
         }
 
         @keyframes fadeIn {
@@ -109,12 +148,38 @@
     <div class="hero">
         <h1>BOB JANSEN</h1>
         <div class="line"></div>
-        <p>bobjansen.nl</p>
+        <p class="domain-name">bobjansen.nl</p>
         
         <a href="https://linkedin.com/in/bobjansennl" target="_blank" class="btn-linkedin">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
             LinkedIn
         </a>
+
+        <div class="certs-title">Certificeringen</div>
+        <div class="certs-grid">
+            
+            <div class="cert-card">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/>
+                </svg>
+                <div class="cert-name">Google<br>Analytics</div>
+            </div>
+
+            <div class="cert-card">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.4 24H0V12.6h11.4V24zM24 24H12.6V12.6H24V24zM11.4 11.4H0V0h11.4v11.4zm12.6 0H12.6V0H24v11.4z"/>
+                </svg>
+                <div class="cert-name">Azure Data<br>DP-900</div>
+            </div>
+
+            <div class="cert-card">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+                <div class="cert-name">Andere<br>Expertise</div>
+            </div>
+
+        </div>
     </div>
 
 </body>
