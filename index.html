@@ -18,18 +18,15 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body, html {
-            min-height: 100vh;
+            height: 100%;
             width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background: linear-gradient(-45deg, #0f172a, #1e293b, #334155, #1e1b4b);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
             color: white;
-            padding: 40px 20px;
             -webkit-font-smoothing: antialiased;
+            overflow: hidden; /* Voorkomt scrollen op desktop */
         }
 
         @keyframes gradientBG {
@@ -38,9 +35,15 @@
             100% { background-position: 0% 50%; }
         }
 
-        .hero {
+        /* Hoofdsectie in het midden */
+        .main-content {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            max-width: 600px;
+            padding: 20px;
             animation: fadeIn 2s ease-out;
         }
 
@@ -49,7 +52,6 @@
             font-weight: 700;
             letter-spacing: -2px;
             margin-bottom: 0.5rem;
-            color: #fff;
         }
 
         .line-main {
@@ -81,7 +83,6 @@
             font-weight: 400;
             font-size: 0.85rem;
             transition: all 0.4s ease;
-            margin-bottom: 5rem;
         }
 
         .btn-linkedin:hover {
@@ -93,39 +94,29 @@
 
         .btn-linkedin svg { fill: currentColor; width: 14px; height: 14px; }
 
-        /* Certificeringen Sectie */
-        .certs-container {
-            max-width: 450px;
-            margin: 0 auto;
-        }
-
-        .certs-header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 2rem;
+        /* Certificeringen aan de bodem */
+        .footer-certs {
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            padding: 0 20px;
+            animation: fadeInBottom 2.5s ease-out;
         }
 
         .certs-title {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 3px;
-            opacity: 0.35;
-            font-weight: 400;
-            padding-bottom: 8px;
-        }
-
-        .certs-underline {
-            height: 1px;
-            width: 100%;
-            max-width: 200px;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
+            opacity: 0.25;
+            margin-bottom: 20px;
         }
 
         .certs-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 25px;
+            gap: 40px;
             justify-content: center;
         }
 
@@ -133,46 +124,53 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 100px;
             transition: all 0.4s ease;
-            cursor: default;
         }
 
         .cert-card svg {
-            width: 24px;
-            height: 24px;
-            fill: rgba(255, 255, 255, 0.2);
-            margin-bottom: 12px;
-            transition: fill 0.4s ease, transform 0.4s ease;
+            width: 20px;
+            height: 20px;
+            fill: rgba(255, 255, 255, 0.15);
+            margin-bottom: 8px;
+            transition: fill 0.4s ease;
         }
 
         .cert-card:hover svg {
-            fill: rgba(255, 255, 255, 0.7);
-            transform: translateY(-2px);
+            fill: rgba(255, 255, 255, 0.6);
         }
 
         .cert-name {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 300;
-            color: rgba(255, 255, 255, 0.3);
-            text-align: center;
-            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.2);
+            letter-spacing: 0.5px;
             transition: color 0.4s ease;
         }
 
         .cert-card:hover .cert-name {
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.5);
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInBottom {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Mobiele aanpassing: als het scherm te klein is voor absolute positionering */
+        @media (max-height: 700px) {
+            body, html { overflow: auto; }
+            .footer-certs { position: relative; bottom: auto; margin-top: 60px; padding-bottom: 40px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="hero">
+    <div class="main-content">
         <h1>BOB JANSEN</h1>
         <div class="line-main"></div>
         <p class="domain-name">bobjansen.nl</p>
@@ -181,28 +179,22 @@
             <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
             LinkedIn
         </a>
+    </div>
 
-        <div class="certs-container">
-            <div class="certs-header">
-                <div class="certs-title">Certificeringen</div>
-                <div class="certs-underline"></div>
+    <div class="footer-certs">
+        <div class="certs-title">Certificeringen</div>
+        <div class="certs-grid">
+            <div class="cert-card">
+                <svg viewBox="0 0 24 24"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>
+                <div class="cert-name">Analytics</div>
             </div>
-            
-            <div class="certs-grid">
-                <div class="cert-card">
-                    <svg viewBox="0 0 24 24"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>
-                    <div class="cert-name">Google<br>Analytics</div>
-                </div>
-
-                <div class="cert-card">
-                    <svg viewBox="0 0 24 24"><path d="M11.4 24H0V12.6h11.4V24zM24 24H12.6V12.6H24V24zM11.4 11.4H0V0h11.4v11.4zm12.6 0H12.6V0H24v11.4z"/></svg>
-                    <div class="cert-name">Azure Data<br>DP-900</div>
-                </div>
-
-                <div class="cert-card">
-                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                    <div class="cert-name">Marketing<br>Expertise</div>
-                </div>
+            <div class="cert-card">
+                <svg viewBox="0 0 24 24"><path d="M11.4 24H0V12.6h11.4V24zM24 24H12.6V12.6H24V24zM11.4 11.4H0V0h11.4v11.4zm12.6 0H12.6V0H24v11.4z"/></svg>
+                <div class="cert-name">DP-900</div>
+            </div>
+            <div class="cert-card">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                <div class="cert-name">Expertise</div>
             </div>
         </div>
     </div>
