@@ -26,7 +26,7 @@
             animation: gradientBG 15s ease infinite;
             color: white;
             -webkit-font-smoothing: antialiased;
-            overflow: hidden; /* Voorkomt scrollen op desktop */
+            overflow: hidden;
         }
 
         @keyframes gradientBG {
@@ -35,7 +35,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Hoofdsectie in het midden */
         .main-content {
             height: 100vh;
             display: flex;
@@ -70,31 +69,32 @@
             margin-bottom: 2.5rem;
         }
 
+        /* De herstelde blauwe LinkedIn knop */
         .btn-linkedin {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            padding: 10px 24px;
-            background: rgba(255, 255, 255, 0.03);
-            color: rgba(255, 255, 255, 0.8);
+            padding: 12px 28px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
             text-decoration: none;
             border-radius: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            font-weight: 400;
-            font-size: 0.85rem;
-            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
         }
 
         .btn-linkedin:hover {
-            background: rgba(255, 255, 255, 0.08);
+            background: #0077b5;
             border-color: #0077b5;
-            color: #fff;
-            transform: translateY(-1px);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
-        .btn-linkedin svg { fill: currentColor; width: 14px; height: 14px; }
+        .btn-linkedin svg { fill: white; width: 16px; height: 16px; }
 
-        /* Certificeringen aan de bodem */
+        /* Certificeringen met lijn en links */
         .footer-certs {
             position: absolute;
             bottom: 40px;
@@ -105,50 +105,66 @@
             animation: fadeInBottom 2.5s ease-out;
         }
 
+        .certs-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
         .certs-title {
             font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 3px;
-            opacity: 0.25;
-            margin-bottom: 20px;
+            opacity: 0.3;
+            font-weight: 400;
+            padding-bottom: 8px;
+        }
+
+        .certs-underline {
+            height: 1px;
+            width: 150px;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.15), transparent);
         }
 
         .certs-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 40px;
+            gap: 35px;
             justify-content: center;
         }
 
-        .cert-card {
+        .cert-link {
+            text-decoration: none;
             display: flex;
             flex-direction: column;
             align-items: center;
             transition: all 0.4s ease;
         }
 
-        .cert-card svg {
-            width: 20px;
-            height: 20px;
-            fill: rgba(255, 255, 255, 0.15);
+        .cert-link svg {
+            width: 22px;
+            height: 22px;
+            fill: rgba(255, 255, 255, 0.2);
             margin-bottom: 8px;
-            transition: fill 0.4s ease;
+            transition: fill 0.4s ease, transform 0.4s ease;
         }
 
-        .cert-card:hover svg {
-            fill: rgba(255, 255, 255, 0.6);
+        .cert-link:hover svg {
+            fill: rgba(255, 255, 255, 0.7);
+            transform: translateY(-3px);
         }
 
         .cert-name {
             font-size: 0.65rem;
             font-weight: 300;
-            color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.25);
             letter-spacing: 0.5px;
             transition: color 0.4s ease;
         }
 
-        .cert-card:hover .cert-name {
-            color: rgba(255, 255, 255, 0.5);
+        .cert-link:hover .cert-name {
+            color: rgba(255, 255, 255, 0.6);
         }
 
         @keyframes fadeIn {
@@ -161,7 +177,6 @@
             to { opacity: 1; }
         }
 
-        /* Mobiele aanpassing: als het scherm te klein is voor absolute positionering */
         @media (max-height: 700px) {
             body, html { overflow: auto; }
             .footer-certs { position: relative; bottom: auto; margin-top: 60px; padding-bottom: 40px; }
@@ -182,20 +197,23 @@
     </div>
 
     <div class="footer-certs">
-        <div class="certs-title">Certificeringen</div>
+        <div class="certs-header">
+            <div class="certs-title">Certificeringen</div>
+            <div class="certs-underline"></div>
+        </div>
         <div class="certs-grid">
-            <div class="cert-card">
+            <a href="#" target="_blank" class="cert-link">
                 <svg viewBox="0 0 24 24"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>
                 <div class="cert-name">Analytics</div>
-            </div>
-            <div class="cert-card">
+            </a>
+            <a href="#" target="_blank" class="cert-link">
                 <svg viewBox="0 0 24 24"><path d="M11.4 24H0V12.6h11.4V24zM24 24H12.6V12.6H24V24zM11.4 11.4H0V0h11.4v11.4zm12.6 0H12.6V0H24v11.4z"/></svg>
                 <div class="cert-name">DP-900</div>
-            </div>
-            <div class="cert-card">
+            </a>
+            <a href="#" target="_blank" class="cert-link">
                 <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                 <div class="cert-name">Expertise</div>
-            </div>
+            </a>
         </div>
     </div>
 
