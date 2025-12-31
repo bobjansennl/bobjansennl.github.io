@@ -8,6 +8,7 @@
           gtag('js', new Date());
           gtag('config', 'G-DKDE5GDEKQ');
     </script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bob Jansen</title>
@@ -18,24 +19,29 @@
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..800&family=Geist+Mono:wght@100..400&display=swap" rel="stylesheet">
     
     <style>
+        /* RESET & BASE */
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body, html {
-            height: 100%; width: 100%;
+        ::selection { background: rgba(59, 130, 246, 0.3); color: white; }
+
+        html { height: 100%; }
+
+        body {
             font-family: 'Geist', sans-serif;
             -webkit-font-smoothing: antialiased;
             color: white;
             background-color: #0f172a;
-            overflow: hidden;
-        }
-
-        body {
             background: linear-gradient(-45deg, #0f172a, #1e293b, #1e1b4b, #0f172a);
             background-size: 400% 400%;
             animation: combinedAnim 15s ease infinite;
-            position: relative;
+            /* Cruciaal voor mobiele scroll */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
         }
 
+        /* GRID BACKGROUND */
         body::before {
             content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
             background-image: 
@@ -50,22 +56,30 @@
 
         @keyframes combinedAnim { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-        /* HERO ALTIJD IN HET MIDDEN */
-        .hero-section {
-            height: 100vh;
+        /* LAYOUT CONTAINER */
+        .main-wrapper {
+            flex: 1; /* Vult minimaal het scherm */
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
             position: relative;
             z-index: 1;
-            animation: gridFadeIn 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            width: 100%;
         }
 
-        @keyframes gridFadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        /* HERO SECTION (Naam, Tagline, URL, Socials) */
+        .hero-section {
+            /* Margin auto zorgt voor verticale centrering in de beschikbare ruimte */
+            margin-top: auto;
+            margin-bottom: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            animation: fadeIn 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
 
-        .header-group { display: inline-flex; flex-direction: column; align-items: center; width: fit-content; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         h1 { 
             font-size: clamp(2.5rem, 7vw, 4.5rem); 
@@ -80,6 +94,7 @@
             background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px); border-radius: 999px; 
             border: 1px solid rgba(255, 255, 255, 0.04); margin-bottom: 25px;
+            cursor: default;
         }
 
         .tagline {
@@ -100,25 +115,25 @@
         .domain-name::before, .domain-name::after { content: ""; height: 1px; flex-grow: 1; background: linear-gradient(to right, transparent, white); margin: 0 20px; }
         .domain-name::after { background: linear-gradient(to left, transparent, white); }
         
-        .social-links { display: flex; gap: 30px; justify-content: center; }
+        .social-links { display: flex; gap: 30px; justify-content: center; margin-bottom: 20px; }
         .social-icon svg { width: 22px; height: 22px; fill: rgba(255, 255, 255, 0.25); transition: 0.3s; cursor: pointer; }
         .social-icon:hover svg { fill: white; transform: translateY(-3px); }
 
-        /* FOOTER CERTS: FIXED POSITIE ONDERAAN */
+        /* FOOTER CERTS */
         .footer-certs { 
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
+            /* Push naar beneden in de flex container */
+            margin-top: auto; 
             width: 450px;
+            /* Zorgt dat hij horizontaal gecentreerd blijft in de flex kolom */
+            align-self: center; 
             display: flex;
-            flex-direction: column-reverse; /* Panel opent omhoog op desktop */
             align-items: center;
-            z-index: 10;
             cursor: pointer;
+            z-index: 10;
+            padding-bottom: 20px; /* Ruimte onderaan het scherm */
         }
         
-        .certs-header { display: flex; flex-direction: column; align-items: center; width: 100%; padding-top: 15px; }
+        .certs-header { display: flex; flex-direction: column; align-items: center; width: 100%; padding: 15px 0; }
         .certs-title { font-family: 'Geist Mono', monospace; font-size: 0.5rem; text-transform: uppercase; letter-spacing: 0.3em; opacity: 0.3; padding-bottom: 12px; }
         .certs-underline-container { display: flex; align-items: center; justify-content: center; width: 100%; gap: 15px; }
         .line-half { height: 1px; flex-grow: 1; background: linear-gradient(to right, transparent, rgba(255,255,255,0.1)); }
@@ -132,12 +147,14 @@
             backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); 
             border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.03);
         }
-        .footer-certs.active .glass-panel-container { max-height: 500px; opacity: 1; }
-
+        
         .certs-grid { display: flex; width: 100%; }
         .cert-item { flex: 1; padding: 25px 5px; opacity: 0; transform: translateY(10px); transition: all 0.6s ease; text-align: center; position: relative; }
         .footer-certs.active .cert-item { opacity: 1; transform: translateY(0); }
-        
+        .footer-certs.active .cert-item:nth-child(1) { transition-delay: 0.1s; }
+        .footer-certs.active .cert-item:nth-child(2) { transition-delay: 0.2s; }
+        .footer-certs.active .cert-item:nth-child(3) { transition-delay: 0.3s; }
+
         .cert-item:not(:last-child)::after { content: ""; position: absolute; right: 0; top: 25%; bottom: 25%; width: 1px; background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.05), transparent); }
         .cert-icon svg { width: 18px; height: 18px; fill: rgba(255, 255, 255, 0.12); margin-bottom: 15px; }
         .footer-certs.active .cert-item:nth-child(1) .cert-icon svg { fill: #fbbc04; }
@@ -148,17 +165,41 @@
         .cert-links-list a { font-family: 'Geist Mono', monospace; color: rgba(255, 255, 255, 0.25); text-decoration: none; font-size: 0.6rem; transition: 0.3s; }
         .cert-links-list a:hover { color: white; }
 
-        /* MOBILE FIX */
-        @media (max-width: 768px) { 
-            body, html { overflow-y: auto; height: auto; min-height: 100%; }
-            .hero-section { height: 85vh; } /* Houdt de naam centraal maar geeft ruimte */
-            .domain-name { width: 90vw; }
-            .footer-certs { 
-                position: relative; 
-                bottom: 20px; 
-                flex-direction: column; /* Op mobiel panel ONDER de header */
-                width: 90vw;
+        /* --- DESKTOP LOGICA --- */
+        @media (min-width: 769px) {
+            /* Fixeert de footer onderaan, los van de flow */
+            .footer-certs {
+                position: absolute;
+                bottom: 50px;
+                left: 50%;
+                transform: translateX(-50%);
+                flex-direction: column-reverse; /* Panel opent OMHOOG */
+                margin-top: 0; /* Reset de margin-auto */
             }
+            .glass-panel-container {
+                margin-bottom: 25px; /* Ruimte tussen panel en header */
+            }
+            .footer-certs.active .glass-panel-container { max-height: 500px; opacity: 1; }
+        }
+
+        /* --- MOBILE LOGICA --- */
+        @media (max-width: 768px) { 
+            .header-group, .domain-name, .footer-certs { width: 90vw; }
+            
+            /* Footer blijft in de flow, dus geen overlap */
+            .footer-certs {
+                position: relative;
+                flex-direction: column; /* Panel opent OMLAAG */
+                transform: none;
+                left: auto;
+                margin-bottom: 20px;
+            }
+            .glass-panel-container {
+                margin-top: 10px; /* Ruimte tussen header en panel */
+            }
+            .footer-certs.active .glass-panel-container { max-height: 600px; opacity: 1; }
+            
+            /* Stapel de items onder elkaar op mobiel */
             .certs-grid { flex-direction: column; }
             .cert-item::after { display: none; }
             .cert-item { border-bottom: 1px solid rgba(255,255,255,0.05); }
@@ -167,48 +208,51 @@
 </head>
 <body>
 
-    <div class="hero-section">
-        <div class="header-group">
-            <h1>BOB JANSEN</h1>
-            <div class="tagline-container">
-                <p class="tagline">Enabling data-driven decision makers</p>
+    <div class="main-wrapper">
+        <div class="hero-section">
+            <div class="header-group">
+                <h1>BOB JANSEN</h1>
+                <div class="tagline-container">
+                    <p class="tagline">Enabling data-driven decision makers</p>
+                </div>
+                <p class="domain-name">bobjansen.nl</p>
             </div>
-            <p class="domain-name">bobjansen.nl</p>
+            
+            <div class="social-links">
+                <a href="https://linkedin.com/in/bobjansennl" target="_blank" rel="noopener" class="social-icon">
+                    <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+                <a href="https://github.com/bobjansennl" target="_blank" rel="noopener" class="social-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                </a>
+            </div>
         </div>
-        
-        <div class="social-links">
-            <a href="https://linkedin.com/in/bobjansennl" target="_blank" rel="noopener" class="social-icon">
-                <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-            </a>
-            <a href="https://github.com/bobjansennl" target="_blank" rel="noopener" class="social-icon">
-                <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-            </a>
-        </div>
-    </div>
 
-    <div class="footer-certs" id="certsToggle" onclick="toggleAllCerts()">
-        <div class="glass-panel-container">
-            <div class="certs-grid">
-                <div class="cert-item">
-                    <div class="cert-icon"><svg viewBox="0 0 24 24"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg></div>
-                    <ul class="cert-links-list"><li><a href="#" target="_blank">Google Analytics</a></li><li><a href="#" target="_blank">Tag Manager</a></li></ul>
-                </div>
-                <div class="cert-item">
-                    <div class="cert-icon"><svg viewBox="0 0 24 24"><path d="M11.4 24H0V12.6h11.4V24zM24 24H12.6V12.6H24V24zM11.4 11.4H0V0h11.4v11.4zm12.6 0H12.6V0H24v11.4z"/></svg></div>
-                    <ul class="cert-links-list"><li><a href="#" target="_blank">DP-900</a></li><li><a href="#" target="_blank">AZ-900</a></li></ul>
-                </div>
-                <div class="cert-item">
-                    <div class="cert-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
-                    <ul class="cert-links-list"><li><a href="#" target="_blank">Python</a></li><li><a href="#" target="_blank">SQL</a></li></ul>
+        <div class="footer-certs" id="certsToggle" onclick="toggleAllCerts()">
+            <div class="certs-header">
+                <div class="certs-title">Certificeringen</div>
+                <div class="certs-underline-container">
+                    <div class="line-half"></div>
+                    <svg class="chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                    <div class="line-half right"></div>
                 </div>
             </div>
-        </div>
-        <div class="certs-header">
-            <div class="certs-title">Certificeringen</div>
-            <div class="certs-underline-container">
-                <div class="line-half"></div>
-                <svg class="chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
-                <div class="line-half right"></div>
+
+            <div class="glass-panel-container">
+                <div class="certs-grid">
+                    <div class="cert-item">
+                        <div class="cert-icon"><svg viewBox="0 0 24 24"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg></div>
+                        <ul class="cert-links-list"><li><a href="#" target="_blank">Google Analytics</a></li><li><a href="#" target="_blank">Tag Manager</a></li></ul>
+                    </div>
+                    <div class="cert-item">
+                        <div class="cert-icon"><svg viewBox="0 0 24 24"><path d="M11.4 24H0V12.6h11.4V24zM24 24H12.6V12.6H24V24zM11.4 11.4H0V0h11.4v11.4zm12.6 0H12.6V0H24v11.4z"/></svg></div>
+                        <ul class="cert-links-list"><li><a href="#" target="_blank">DP-900</a></li><li><a href="#" target="_blank">AZ-900</a></li></ul>
+                    </div>
+                    <div class="cert-item">
+                        <div class="cert-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+                        <ul class="cert-links-list"><li><a href="#" target="_blank">Python</a></li><li><a href="#" target="_blank">SQL</a></li></ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
